@@ -5,17 +5,48 @@ import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
 import './Blog.css';
 
+import { getAllPosts } from '../../api/postsService';
+
 class Blog extends Component {
+    state = {
+        allPosts: [],
+        selectedPostId: null,
+    }
+
+    handleUpdateSelectedPost = (postId) => {
+        const selectedPostId = postId;
+        this.setState({ selectedPostId }); 
+    }
+
+    componentDidMount = async () => {
+        const allPosts = await getAllPosts()
+            .then(res => res.data)
+            .then(data => data.filter(post => post.id < 5))
+            .catch(() => []);
+        
+        this.setState({ allPosts });
+    }
+
     render () {
         return (
             <div>
                 <section className="Posts">
-                    <Post />
-                    <Post />
-                    <Post />
+                {
+                    this.state.allPosts.map(post => (
+                        <Post
+                            key = { post.id }
+                            title = { post.title }
+                            author = 'OTree'
+                            postId = { post.id }
+                            updateSelectedPost = { this.handleUpdateSelectedPost }
+                        />
+                    ))
+                }
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost
+                        selectedPostId = { this.state.selectedPostId }
+                    />
                 </section>
                 <section>
                     <NewPost />
