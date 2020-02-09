@@ -13,6 +13,11 @@ class Blog extends Component {
         selectedPostId: null,
     }
 
+    handleUpdateSelectedPost = (postId) => {
+        const selectedPostId = postId;
+        this.setState({ selectedPostId }); 
+    }
+
     componentDidMount = async () => {
         const allPosts = await getAllPosts()
             .then(res => res.data)
@@ -39,7 +44,9 @@ class Blog extends Component {
                 }
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost
+                        selectedPostId = { this.state.selectedPostId }
+                    />
                 </section>
                 <section>
                     <NewPost />
