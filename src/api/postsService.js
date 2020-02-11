@@ -6,3 +6,4 @@ export const getPostComments = (postId) => axios.get(`https://jsonplaceholder.ty
 export const getPostsByUserId = (userId) => axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
 export const postNewPost = (postInfo) => axios.post('https://jsonplaceholder.typicode.com/posts', postInfo);
 export const putPost = (postId, postInfo) => axios.put(`https://jsonplaceholder.typicode.com/posts/${postId}`, postInfo);
+export const deletePost = (postId) => axios.delete(`https://jsonplaceholder.typicode.com/posts/${postId}`);
