@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
-
+import { postNewPost } from '../../api/postsService';
 import './NewPost.css';
 
 class NewPost extends Component {
     state = {
         title: '',
         content: '',
-        author: 'Max'
+        author: 'OTree',
+    }
+
+    postNewPostHandler = async () => {
+        const { title, content, author } = this.state;
+        const postInfo = {
+            title,
+            author,
+            body: content,
+        };
+
+        await postNewPost(postInfo)
+            .then(res => res.data)
+            .then(data => { console.log(data); })
+            .catch(err => { console.log(err); });
     }
 
     render () {
@@ -22,7 +36,9 @@ class NewPost extends Component {
                     <option value="Max">Max</option>
                     <option value="Manu">Manu</option>
                 </select>
-                <button>Add Post</button>
+                <button
+                    onClick = { this.postNewPostHandler }
+                >Add Post</button>
             </div>
         );
     }
