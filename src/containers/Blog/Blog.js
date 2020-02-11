@@ -5,7 +5,7 @@ import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
 import './Blog.css';
 
-import { getAllPosts } from '../../api/postsService';
+import { getAllPosts, deletePost } from '../../api/postsService';
 
 class Blog extends Component {
     state = {
@@ -16,6 +16,13 @@ class Blog extends Component {
     handleUpdateSelectedPost = (postId) => {
         const selectedPostId = postId;
         this.setState({ selectedPostId }); 
+    }
+
+    deletePostHandler = async (postId) => {
+        await deletePost(postId)
+            .then(res => res.data)
+            .then(data => { console.log(data); })
+            .catch(err => { console.log(err); });
     }
 
     componentDidMount = async () => {
@@ -45,6 +52,7 @@ class Blog extends Component {
                 </section>
                 <section>
                     <FullPost
+                        deletePost = { this.deletePostHandler }
                         selectedPostId = { this.state.selectedPostId }
                     />
                 </section>

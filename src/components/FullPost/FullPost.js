@@ -39,7 +39,9 @@ class FullPost extends Component {
                     <h1>{ this.state.postContent.title }</h1>
                     <p>{ this.state.postContent.body }</p>
                     <div className="Edit">
-                        <button className="Delete">Delete</button>
+                        <button className="Delete"
+                            onClick = { () => { this.props.deletePost(this.props.selectedPostId)} }
+                        >Delete</button>
                     </div>
                 </div>
             );
