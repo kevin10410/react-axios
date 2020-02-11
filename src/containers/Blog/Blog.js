@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
 import NewPost from '../../components/NewPost/NewPost';
+import Header from '../../components/Header/Header';
 import './Blog.css';
 
 import { getAllPosts, deletePost } from '../../api/postsService';
@@ -37,6 +38,7 @@ class Blog extends Component {
     render () {
         return (
             <div>
+                <Header/>
                 <section className="Posts">
                 {
                     this.state.allPosts.map(post => (
