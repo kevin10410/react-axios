@@ -17,6 +17,7 @@
 }
 
 .Header a:hover,
-.Header a:active{
+.Header a:active,
+.Header a.active {
   color: #fa923f;
 }
