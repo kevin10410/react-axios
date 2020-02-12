@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
 import { getAllPosts, deletePost } from '../../api/postsService';
+import { Link } from 'react-router-dom';
+
 import './Posts.css';
 
 class Posts extends Component {
@@ -37,13 +39,17 @@ class Posts extends Component {
         <section className="Posts">
           {
             this.state.allPosts.map(post => (
-              <Post
+              <Link
+                to={`/${post.id}`}
                 key = { post.id }
-                title = { post.title }
-                author = 'OTree'
-                postId = { post.id }
-                updateSelectedPost = { this.handleUpdateSelectedPost }
-              />
+              >
+                <Post
+                  title = { post.title }
+                  author = 'OTree'
+                  postId = { post.id }
+                  updateSelectedPost = { this.handleUpdateSelectedPost }
+                />
+              </Link>
             ))
           }
         </section>
