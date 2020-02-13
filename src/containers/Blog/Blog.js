@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
 import NewPost from '../../components/NewPost/NewPost';
-import FullPost from '../../components/FullPost/FullPost';
 import Header from '../../components/Header/Header';
 import './Blog.css';
 
@@ -14,21 +13,15 @@ class Blog extends Component {
       <div>
         <Header />
         <Switch>
-          <Route path="/" exact render = {(routeProps) =>
-            <Posts
-              { ...routeProps }
-            />
-          }/>
           <Route path="/new-post" exact render = {() =>
             <section>
               <NewPost />
             </section>
           }/>
-          <Route
-            path="/:id" exact render = {(routeProps) =>
-              <FullPost
-                { ...routeProps }
-              />
+          <Route path="/" render = {(routeProps) =>
+            <Posts
+              { ...routeProps }
+            />
           }/>
         </Switch>      
       </div>

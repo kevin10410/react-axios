@@ -27,10 +27,10 @@ class FullPost extends Component {
           .then(res => res.data)
           .then(data => { console.log(data); })
           .catch(err => { console.log(err); });
-      }
+    }
 
-    componentDidMount() {
-        const { id } = this.props.match.params;
+    componentDidUpdate() {
+        const id = parseInt(this.props.match.params.id, 10);
 
         this.isNeedToFetchPost(id)
             && this.updatePostContent(id);

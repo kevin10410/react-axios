@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Post from '../../components/Post/Post';
+import FullPost from '../../components/FullPost/FullPost';
+import { Route } from 'react-router-dom';
 import { getAllPosts } from '../../api/postsService';
 
 import './Posts.css';
@@ -38,6 +40,10 @@ class Posts extends Component {
             ))
           }
         </section>
+        <Route
+          path="/:id"
+          exact
+          component = { FullPost }/>
       </React.Fragment>
     );
   }
