@@ -14,8 +14,10 @@ class Blog extends Component {
       <div>
         <Header />
         <Switch>
-          <Route path="/" exact render = {() =>
-            <Posts />
+          <Route path="/" exact render = {(routeProps) =>
+            <Posts
+              { ...routeProps }
+            />
           }/>
           <Route path="/new-post" exact render = {() =>
             <section>
