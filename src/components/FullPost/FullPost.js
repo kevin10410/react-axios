@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getPost } from '../../api/postsService';
+import { getPost, deletePost } from '../../api/postsService';
 
 import './FullPost.css';
 
@@ -22,11 +22,18 @@ class FullPost extends Component {
         this.setState({ postContent });        
     }
 
-    componentDidUpdate() {
-        const { selectedPostId } = this.props;
+    deletePostHandler = async (postId) => {
+        await deletePost(postId)
+          .then(res => res.data)
+          .then(data => { console.log(data); })
+          .catch(err => { console.log(err); });
+    }
 
-        this.isNeedToFetchPost(selectedPostId)
-            && this.updatePostContent(selectedPostId);
+    componentDidUpdate() {
+        const id = parseInt(this.props.match.params.id, 10);
+
+        this.isNeedToFetchPost(id)
+            && this.updatePostContent(id);
     }
 
      render () {
@@ -45,7 +52,11 @@ class FullPost extends Component {
                     </div>
                 </div>
             );
-        return post;
+        return (
+            <section>
+                { post }
+            </section>
+        );
     }
 }
 
